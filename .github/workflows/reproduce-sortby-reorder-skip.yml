@@ -1,0 +1,30 @@
+name: Reproduce sort-by reorder skip
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+  actions: write
+
+jobs:
+  reproduce:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: v-chiranjib-swain/stale@5562db9b644f15a202c81ffe1c9dd362fffdde54
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          only-pr-labels: pagination-1360
+          stale-pr-label: U:Stale
+          stale-pr-message: 'This PR is stale.'
+          close-pr-message: ''
+          close-pr-label: ''
+          days-before-pr-stale: 0
+          days-before-pr-close: 9999
+          days-before-issue-stale: -1
+          days-before-issue-close: -1
+          operations-per-run: 1000
+          sort-by: comments
+          ascending: true
