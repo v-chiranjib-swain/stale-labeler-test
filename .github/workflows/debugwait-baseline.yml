@@ -1,0 +1,36 @@
+name: Debug-only wait-skip comparison (baseline, pre-fix)
+
+on:
+  workflow_dispatch:
+    inputs:
+      debug-only:
+        description: 'debug-only value for this dispatch'
+        default: 'true'
+        required: false
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+  actions: write
+
+jobs:
+  reproduce:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: v-chiranjib-swain/stale@5562db9b644f15a202c81ffe1c9dd362fffdde54
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          debug-only: ${{ github.event.inputs.debug-only }}
+          only-pr-labels: debugwait-1360
+          stale-pr-label: U:Stale
+          stale-pr-message: ''
+          close-pr-message: ''
+          close-pr-label: ''
+          days-before-pr-stale: 0
+          days-before-pr-close: 0
+          days-before-issue-stale: -1
+          days-before-issue-close: -1
+          operations-per-run: 1000
+          sort-by: created
+          ascending: true
