@@ -1,0 +1,21 @@
+name: Stale PR activity check
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/stale@v11.0.0
+        with:
+          only-labels: stale-push-demo
+          stale-pr-label: stale-push-demo-stale
+          days-before-issue-stale: -1
+          days-before-pr-stale: 0
+          days-before-close: -1
+          stale-pr-message: 'This test pull request is inactive.'
+          remove-stale-when-updated: true
+          operations-per-run: 100
