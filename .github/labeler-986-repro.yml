@@ -1,0 +1,9 @@
+repro-986-head:
+  - head-branch: '^feature/labeler-986-repro$'
+
+repro-986-base:
+  - base-branch: '^main$'
+
+repro-986-files:
+  - changed-files:
+      - any-glob-to-any-file: 'docs/labeler-986/**'
